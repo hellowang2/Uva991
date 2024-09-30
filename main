@@ -1,0 +1,34 @@
+import java.util.Scanner;
+
+public class Main {
+
+    // 計算第 n 個卡塔蘭數
+    public static int catalanNumber(int n) {
+        int[] catalan = new int[n + 1];
+        catalan[0] = 1;  // C_0 = 1
+
+        for (int i = 1; i <= n; i++) {
+            catalan[i] = 0;
+            for (int j = 0; j < i; j++) {
+                catalan[i] += catalan[j] * catalan[i - 1 - j];
+            }
+        }
+
+        return catalan[n];
+    }
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        while (scanner.hasNextInt()) {
+            int n = scanner.nextInt();
+            int result = catalanNumber(n);
+            System.out.println(result);
+            if (scanner.hasNextInt()) {
+                System.out.println();  // 在測試數據之間輸出一個空行
+            }
+        }
+
+        scanner.close();
+    }
+}
